@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Web Storage</title>
+</head>
+<body>
+	<label for="fname">First Name:</label>
+	<input type="text" id="fname" name="fname"><br><br>
+	<label for="lname">Last Name:</label>
+	<input type="text" id="lname" name="lname"><br><br>
+	<label for="dob">Date of Birth:</label>
+	<input type="date" id="dob" name="dob"><br><br>
+	<button onclick="saveData()">Save Data</button>
+	<p id="output"></p>
+	
+	<script>
+		function saveData() {
+			var firstName = document.getElementById("fname").value;
+			var lastName = document.getElementById("lname").value;
+			var dob = document.getElementById("dob").value;
+			var data = {
+				firstName: firstName,
+				lastName: lastName,
+				dob: dob
+			};
+			localStorage.setItem("userData", JSON.stringify(data));
+			alert("Data saved successfully!");
+		}
+		
+		var storedData = localStorage.getItem("userData");
+		if (storedData) {
+			storedData = JSON.parse(storedData);
+			var output = document.getElementById("output");
+			output.innerHTML = "First Name: " + storedData.firstName + "<br>Last Name: " + storedData.lastName + "<br>Date of Birth: " + storedData.dob;
+		}
+	</script>
+</body>
+</html>
